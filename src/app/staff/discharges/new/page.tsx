@@ -63,15 +63,15 @@ export default function NewDischargePage() {
   }
 
   return <>
-    <h1>퇴원 안내문 작성</h1><p className="muted">검수된 안내문을 선택하고 의료진이 직접 확인한 후 발급합니다.</p>
-    <section className="card"><div className="step">STEP 1</div><h2>진료 내용 입력</h2>
-      <label style={{ display: "flex", gap: 8, alignItems: "center" }}><input style={{ width: 18 }} type="checkbox" checked={demo} onChange={(event) => setDemo(event.target.checked)} />데모 모드</label>
+    <header className="page-header"><p className="eyebrow">Smart discharge</p><h1>퇴원 안내문 작성</h1><p className="muted">진료 내용을 정리하고, 검수된 안내문을 의료진이 직접 확인한 뒤 환자에게 전달합니다.</p></header>
+    <section className="card card-accent"><div className="step">STEP 1 · INPUT</div><h2>진료 내용 입력</h2>
+      <label className="checkbox-row"><input type="checkbox" checked={demo} onChange={(event) => setDemo(event.target.checked)} />데모 데이터로 빠르게 체험하기</label>
       <div className="field"><label htmlFor="clinical">진단명, 검사·진찰 소견, 처방 내용</label><textarea id="clinical" value={clinicalText} onChange={(event) => setClinicalText(event.target.value)} placeholder="예: 급성 장염 의심. 복부는 부드럽고 반발통 없음..." /></div>
       <button onClick={analyze} disabled={loading || !clinicalText.trim()}>{loading ? "분석 중..." : "진료 내용 분석"}</button>
     </section>
 
-    {analysis && <section className="card"><div className="step">STEP 2</div><h2>안내문 선택 및 확인</h2>
-      <p className="muted">AI 추천: <strong>{analysis.templateName || "추천 없음 — 직접 선택해 주세요"}</strong></p>
+    {analysis && <section className="card card-accent"><div className="step">STEP 2 · REVIEW</div><h2>안내문 선택 및 확인</h2>
+      <p className="recommendation"><span>✦</span><span>AI 추천 · <strong>{analysis.templateName || "추천 없음 — 직접 선택해 주세요"}</strong></span></p>
       <div className="field"><label htmlFor="template">질환별 안내문</label><select id="template" value={selectedId} onChange={(event) => setSelectedId(Number(event.target.value))}><option value={0}>선택하세요</option>{templates.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}</select></div>
       <button className="secondary" disabled={!selected} onClick={() => selected && applyTemplate(selected)}>선택한 안내문 적용</button>
       <div className="field"><label>진단명 또는 의심 진단</label><input value={draft.diagnosis} onChange={(event) => setDraft({ ...draft, diagnosis: event.target.value })} /></div>
@@ -79,13 +79,13 @@ export default function NewDischargePage() {
       <div className="field"><label>처방 및 복약 안내</label><textarea value={draft.medication} onChange={(event) => setDraft({ ...draft, medication: event.target.value })} /></div>
       <div className="field"><label>생활·식이·자가관리 안내</label><textarea value={draft.education} onChange={(event) => setDraft({ ...draft, education: event.target.value })} /></div>
       <div className="field"><label>즉시 재내원해야 하는 증상</label><textarea value={draft.warningSigns} onChange={(event) => setDraft({ ...draft, warningSigns: event.target.value })} /></div>
-      <label style={{ display: "flex", gap: 8, alignItems: "center" }}><input style={{ width: 18 }} type="checkbox" checked={confirmed} onChange={(event) => setConfirmed(event.target.checked)} />위 내용을 직접 확인했습니다.</label>
+      <label className="checkbox-row"><input type="checkbox" checked={confirmed} onChange={(event) => setConfirmed(event.target.checked)} />의료진으로서 위 내용을 직접 확인했습니다.</label>
       <div className="actions"><button onClick={approve} disabled={loading || !confirmed}>{loading ? "발급 중..." : "승인 및 QR 발급"}</button></div>
     </section>}
 
     {message && <p className={patientUrl ? "success" : "muted"}>{message}</p>}
-    {patientUrl && <section className="card"><div className="step">STEP 3</div><h2>환자 링크 및 QR</h2>
-      <a className="button" href={patientUrl} target="_blank">환자용 안내문 열기</a><p style={{ overflowWrap: "anywhere" }}>{patientUrl}</p>
+    {patientUrl && <section className="card issue-card"><div><div className="step">STEP 3 · SHARE</div><h2>환자 링크가 준비되었습니다</h2><p className="muted">QR을 스캔하거나 아래 링크를 환자에게 전달해 주세요.</p>
+      <a className="button" href={patientUrl} target="_blank" rel="noreferrer">환자용 안내문 열기 <span>↗</span></a><p className="url-box">{patientUrl}</p></div>
       {qr && <Image className="qr" src={qr} alt="환자 안내문 QR 코드" width={280} height={280} unoptimized />}
     </section>}
   </>;
