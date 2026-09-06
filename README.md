@@ -44,4 +44,5 @@ docker run --rm -p 8501:8501 \
 
 - [MVP 요구사항 분석서](docs/requirements/mvp-requirements.md)
 - [전체 제품 구상](docs/product/product-concept.md)
+- [MVP 기술 설계서](docs/architecture/mvp-technical-design.md)
 - [개발 및 Git 작업 방식](CONTRIBUTING.md)
