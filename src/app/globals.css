@@ -56,18 +56,30 @@ button:disabled { opacity: .5; cursor: not-allowed; transform: none; box-shadow:
 .issue-card { display: grid; grid-template-columns: minmax(0,1fr) 300px; gap: 30px; align-items: center; }
 .url-box { margin: 14px 0 0; padding: 12px 14px; overflow-wrap: anywhere; color: var(--blue-dark); background: var(--sky); border-radius: 11px; font-size: 14px; }
 .qr { width: 260px; max-width: 100%; height: auto; border: 12px solid white; border-radius: 18px; box-shadow: 0 12px 30px rgba(16,47,70,.12); }
-.patient-shell { width: min(760px, calc(100% - 32px)); padding-top: 28px; }
+.patient-shell { width: min(720px, calc(100% - 32px)); padding-top: 24px; }
 .patient-title { position: relative; overflow: hidden; color: white; background: linear-gradient(135deg,var(--navy-deep),#176f99); padding: 36px 34px; border-radius: 26px; margin-bottom: 22px; box-shadow: 0 22px 50px rgba(8,34,53,.18); }
 .patient-title::after { content: "+"; position: absolute; right: 22px; top: -24px; color: rgba(255,255,255,.08); font-size: 170px; line-height: 1; }
 .patient-title .muted { position: relative; z-index: 1; margin-bottom: 0; color: #d9edf6; }
 .patient-kicker { position: relative; z-index: 1; display: inline-flex; margin-bottom: 16px; padding: 7px 11px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.18); border-radius: 999px; font-size: 12px; font-weight: 800; }
-.diagnosis { display: flex; align-items: center; gap: 9px; color: #075985; background: #e0f2fe; border: 1px solid #bae6fd; padding: 13px 16px; border-radius: 14px; font-size: 18px; font-weight: 850; }
+.diagnosis { display: flex; align-items: center; gap: 12px; color: #075985; background: #e0f2fe; border: 1px solid #bae6fd; padding: 14px 17px; border-radius: 14px; font-size: 19px; font-weight: 850; }
+.diagnosis > span:first-child { display: grid; place-items: center; flex: 0 0 28px; width: 28px; height: 28px; color: white; background: var(--blue); border-radius: 50%; font-size: 15px; }
+.diagnosis small { display: block; margin-bottom: 2px; color: #4f829c; font-size: 11px; letter-spacing: .08em; }
+.patient-quick-nav { display: grid; grid-template-columns: repeat(4,1fr); gap: 7px; margin: 12px 0 4px; }
+.patient-quick-nav a { padding: 10px 5px; color: var(--blue-dark); background: rgba(255,255,255,.8); border: 1px solid var(--line); border-radius: 10px; text-align: center; text-decoration: none; font-size: 12px; font-weight: 800; }
 .patient-card { padding: 25px 26px; box-shadow: 0 10px 32px rgba(16,47,70,.06); }
+.patient-card { scroll-margin-top: 16px; }
 .patient-section-title { display: flex; align-items: center; gap: 11px; margin-bottom: 12px; }
 .section-icon { display: grid; place-items: center; flex: 0 0 38px; width: 38px; height: 38px; background: var(--sky); border-radius: 12px; font-size: 19px; }
 .patient-section-title h2 { margin: 0; }
-.patient-copy { margin-bottom: 0; font-size: 17px; line-height: 1.85; white-space: pre-wrap; }
+.patient-copy { font-size: 17px; line-height: 1.85; white-space: pre-wrap; }
+.patient-copy p { margin: 0 0 12px; }
+.patient-copy p:last-child { margin-bottom: 0; }
+.warning-list { display: grid; gap: 13px; margin: 18px 0 0; padding: 0; list-style: none; }
+.warning-list li { position: relative; padding: 13px 14px 13px 43px; color: #712331; background: white; border: 1px solid #f2d2d6; border-radius: 12px; font-size: 17px; font-weight: 700; line-height: 1.55; }
+.warning-list li::before { content: "!"; position: absolute; left: 13px; top: 14px; display: grid; place-items: center; width: 21px; height: 21px; color: white; background: var(--danger); border-radius: 50%; font-size: 13px; }
+.emergency-note { margin: 17px 0 0; padding-top: 16px; border-top: 1px solid #edc7cc; color: var(--danger); font-weight: 800; line-height: 1.65; }
 .patient-footer { display: flex; gap: 11px; align-items: flex-start; padding: 17px 19px; color: var(--muted); background: #eaf1f4; border-radius: 14px; line-height: 1.6; }
+.mobile-break { display: none; }
 .login-wrap { min-height: calc(100vh - 40px); display: grid; place-items: center; }
 .login-card { width: min(460px,100%); margin: 0; padding: 34px; }
 .login-symbol { display: grid; place-items: center; width: 52px; height: 52px; margin-bottom: 24px; color: white; background: linear-gradient(135deg,var(--navy),var(--blue)); border-radius: 16px; font-size: 26px; box-shadow: 0 12px 24px rgba(16,47,70,.18); }
@@ -81,4 +93,22 @@ button:disabled { opacity: .5; cursor: not-allowed; transform: none; box-shadow:
   .patient-title { padding: 28px 23px; border-radius: 21px; }
   .patient-copy { font-size: 16.5px; }
   .issue-card .qr { justify-self: center; }
+}
+@media (max-width: 480px) {
+  body { background: #f4f8fa; }
+  .patient-shell { width: 100%; padding: 0 0 32px; }
+  .patient-title { margin: 0 0 14px; padding: 25px 20px 27px; border-radius: 0 0 25px 25px; box-shadow: 0 13px 30px rgba(8,34,53,.16); }
+  .patient-title h1 { font-size: 30px; }
+  .patient-title .muted { font-size: 15px; line-height: 1.65; }
+  .patient-kicker { margin-bottom: 13px; }
+  .diagnosis { margin: 0 14px; padding: 13px 14px; }
+  .patient-quick-nav { position: sticky; top: 0; z-index: 10; margin: 10px 0 2px; padding: 9px 10px; background: rgba(244,248,250,.94); backdrop-filter: blur(12px); }
+  .patient-quick-nav a { min-width: 0; padding: 9px 2px; font-size: 11px; }
+  .patient-card { margin: 10px 14px; padding: 21px 18px; border-radius: 17px; box-shadow: 0 7px 22px rgba(16,47,70,.055); }
+  .patient-section-title { align-items: flex-start; }
+  .patient-section-title h2 { padding-top: 5px; font-size: 21px; }
+  .patient-copy { font-size: 17px; line-height: 1.82; }
+  .warning-list li { font-size: 16.5px; }
+  .patient-footer { margin: 14px; font-size: 14px; }
+  .mobile-break { display: initial; }
 }
