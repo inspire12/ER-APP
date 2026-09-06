@@ -1,7 +1,11 @@
 .venv
 .idea
+node_modules
+.next
+.git
 __pycache__
 *.pyc
 *.db
 .env
 docs
+legacy

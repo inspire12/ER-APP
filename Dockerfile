@@ -1,13 +1,20 @@
-FROM python:3.12-slim
-
+FROM node:20-alpine AS dependencies
 WORKDIR /app
+COPY package.json pnpm-lock.yaml ./
+RUN corepack enable && pnpm install --frozen-lockfile
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+FROM node:20-alpine AS builder
+WORKDIR /app
+COPY --from=dependencies /app/node_modules ./node_modules
+COPY . .
+RUN corepack enable && pnpm build
 
-COPY main.py .
-
-ENV DATABASE_PATH=/data/reports.db
-EXPOSE 8501
-
-CMD ["python", "-m", "streamlit", "run", "main.py", "--server.address=0.0.0.0", "--server.port=8501", "--server.headless=true"]
+FROM node:20-alpine AS runner
+WORKDIR /app
+ENV NODE_ENV=production
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/node_modules ./node_modules
+EXPOSE 3000
+CMD ["./node_modules/.bin/next", "start", "-p", "3000"]
