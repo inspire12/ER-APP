@@ -1,0 +1,35 @@
+name: Database maintenance
+
+on:
+  workflow_dispatch:
+    inputs:
+      seed:
+        description: "검수된 기본 질환 콘텐츠도 등록합니다"
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.15.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Apply database migrations
+        run: pnpm db:migrate
+      - name: Seed verified disease content
+        if: ${{ inputs.seed }}
+        run: pnpm db:seed

@@ -138,6 +138,12 @@ Repository variable `VERCEL_DEPLOY_ENABLED=true`를 설정하면 Pull Request는
 
 애플리케이션 환경변수는 Vercel Project Settings에서 별도로 설정합니다.
 
+### DB Secret과 마이그레이션
+
+운영 DB 접속 문자열은 저장소에 커밋하지 않고 GitHub Actions Secret `DATABASE_URL`과 Vercel 환경변수 `DATABASE_URL`에 각각 암호화하여 보관합니다. 일반 CI와 Pull Request에는 운영 DB Secret을 전달하지 않습니다.
+
+DB 스키마를 변경한 경우 GitHub 저장소의 `Actions` → `Database maintenance` → `Run workflow`에서 수동으로 적용합니다. `seed`를 선택하면 마이그레이션 후 검수된 기본 질환 콘텐츠도 등록합니다. 이 작업은 GitHub의 `production` Environment 안에서만 실행됩니다.
+
 ## 기존 Streamlit 버전
 
 이전 프로토타입은 `legacy/streamlit/`에 보존했습니다.
