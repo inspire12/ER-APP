@@ -21,15 +21,17 @@ pnpm install
 
 ## 접속 주소
 
-| 용도 | 로컬 주소 | 배포 주소 형식 |
-|---|---|---|
-| 의료진 안내문 작성 | `http://localhost:3000/staff/discharges/new` | `https://서비스주소/staff/discharges/new` |
-| 질환별 콘텐츠 관리 | `http://localhost:3000/staff/content` | `https://서비스주소/staff/content` |
-| 의료진 로그인 | `http://localhost:3000/login` | `https://서비스주소/login` |
-| 환자 안내문 데모 | `http://localhost:3000/p/demo` | `https://서비스주소/p/demo` |
-| 승인된 환자 안내문 | `http://localhost:3000/p/{token}` | `https://서비스주소/p/{token}` |
+운영 서비스 주소: [https://sangwoo-hostital-project.vercel.app](https://sangwoo-hostital-project.vercel.app)
 
-루트 주소(`/`)에 접속하면 의료진 안내문 작성 화면으로 이동합니다. 실제 Vercel 주소는 최초 배포가 끝난 뒤 이 표에 반영합니다.
+| 용도 | 로컬 주소 | 운영 주소 |
+|---|---|---|
+| 의료진 안내문 작성 | `http://localhost:3000/staff/discharges/new` | [바로가기](https://sangwoo-hostital-project.vercel.app/staff/discharges/new) |
+| 질환별 콘텐츠 관리 | `http://localhost:3000/staff/content` | [바로가기](https://sangwoo-hostital-project.vercel.app/staff/content) |
+| 의료진 로그인 | `http://localhost:3000/login` | [바로가기](https://sangwoo-hostital-project.vercel.app/login) |
+| 환자 안내문 데모 | `http://localhost:3000/p/demo` | [바로가기](https://sangwoo-hostital-project.vercel.app/p/demo) |
+| 승인된 환자 안내문 | `http://localhost:3000/p/{token}` | `https://sangwoo-hostital-project.vercel.app/p/{token}` |
+
+루트 주소(`/`)에 접속하면 의료진 안내문 작성 화면으로 이동합니다.
 
 ## 사용법
 
